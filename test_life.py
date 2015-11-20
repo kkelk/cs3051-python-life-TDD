@@ -132,3 +132,14 @@ def test_stable_block_tick():
     assert len(list(game.living)) == 4
     game.tick()
     assert len(list(game.living)) == 4
+
+
+def test_under_population_death():
+    game = Life()
+    game.set_living((0, 0))
+    assert game.is_alive((0, 0))
+
+    game.tick()
+    assert len(list(game.living)) == 0
+    game.tick()
+    assert len(list(game.living)) == 0
