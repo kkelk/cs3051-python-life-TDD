@@ -185,3 +185,23 @@ def test_over_population_death():
         assert game.is_alive((0, 0))
         game.tick()
         assert not game.is_alive((0, 0))
+
+
+def test_over_population_isolated():
+    game = Life()
+    game.set_living((0, 0))
+    game.set_living((0, 1))
+    game.set_living((-1, 0))
+    game.set_living((1, 0))
+    game.set_living((-1, -1))
+
+    game.set_living((10, 10))
+    game.set_living((11, 10))
+    game.set_living((9, 10))
+    game.set_living((10, 11))
+    game.set_living((10, 9))
+
+    assert len(list(game.living)) == 10
+    game.tick()
+    assert not game.is_alive((0, 0))
+    assert not game.is_alive((10, 10))
