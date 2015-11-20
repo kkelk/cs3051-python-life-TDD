@@ -73,3 +73,20 @@ def test_non_integer_set_dead():
 
     assert (True, True) not in game.living
     assert ('test', 'test') not in game.living
+
+
+def test_neighbours():
+    game = Life()
+    neighbours = (
+        (-1, -1),
+        (-1, 0),
+        (-1, 1),
+        (0, 1),
+        (1, 1),
+        (1, 0),
+        (1, -1),
+        (0, -1)
+    )
+
+    assert len(neighbours) == len(list(game.neighbours((0, 0))))
+    assert sorted(neighbours) == sorted(list(game.neighbours((0, 0))))
