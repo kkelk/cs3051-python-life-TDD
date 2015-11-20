@@ -90,3 +90,9 @@ def test_neighbours():
 
     assert len(neighbours) == len(list(game.neighbours((0, 0))))
     assert sorted(neighbours) == sorted(list(game.neighbours((0, 0))))
+
+
+def test_invalid_neighbours():
+    game = Life()
+    with pytest.raises(TypeError):
+        list(game.neighbours((True, True)))
