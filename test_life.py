@@ -216,3 +216,18 @@ def test_reproduction():
     game.tick()
     assert game.is_alive((1, 0))
     assert game.is_alive((-1, 0))
+
+
+def test_reproduction_stable():
+    game = Life()
+    game.set_living((0, 0))
+    game.set_living((-1, 0))
+    game.set_living((-1, -1))
+
+    for i in range(0, 100):
+        game.tick()
+        assert game.is_alive((0, 0))
+        assert game.is_alive((-1, 0))
+        assert game.is_alive((-1, -1))
+
+        assert game.is_alive((0, -1))
