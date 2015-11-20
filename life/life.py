@@ -1,6 +1,9 @@
 class Life(object):
-    def __init__(self):
-        self._living = set()
+    def __init__(self, living_set=None):
+        if living_set:
+            self._living = living_set
+        else:
+            self._living = set()
 
     @property
     def living(self):
@@ -42,4 +45,13 @@ class Life(object):
         self._living.add((x, y))
 
     def tick(self):
-        pass
+        # Take a copy of the current board state, since the next board state is a pure function of the current one, and should not be affected by intermediate results.
+        next_iteration = Life(living_set=self._living.copy())
+
+        # Underpopulation deaths.
+        for cell in self.living:
+            if self.count_living_neighbours(cell) < 2:
+                next_iteration.set_dead(cell)
+
+        # Once all modifications to the next board state have been calculated, replace the current board with the newly calculated one.
+        self._living = next_iteration._living
