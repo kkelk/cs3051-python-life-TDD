@@ -14,13 +14,18 @@ KEYBINDINGS = {
     ord('k'): 'screen_up',
     ord(' '): 'toggle_live',
     ord('n'): 'tick',
-    ord('p'): 'toggle_play'
+    ord('p'): 'toggle_play',
+    ord('='): 'increase_speed',
+    ord('-'): 'decrease_speed'
 }
 
 
 class CursesScreen(object):
     def __init__(self, stdscr):
         curses.curs_set(0)
+
+        self._speed = 10
+        curses.halfdelay(self._speed)
         curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
         curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
 
@@ -101,6 +106,16 @@ class CursesScreen(object):
                     self._game.tick()
                 elif action == 'toggle_play':
                     self._playing = not self._playing
+                elif action == 'increase_speed':
+                    self._speed -= 1
+                    if self._speed < 1:
+                        self._speed = 1
+                    curses.halfdelay(self._speed)
+                elif action == 'decrease_speed':
+                    self._speed += 1
+                    if self._speed > 255:
+                        self._speed = 255
+                    curses.halfdelay(self._speed)
             except KeyError:
                 if c == -1 and self._playing:
                     self._game.tick()
