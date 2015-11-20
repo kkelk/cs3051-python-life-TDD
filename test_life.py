@@ -47,6 +47,6 @@ def test_repeated_set_living():
 def test_is_alive():
     game = Life()
     assert not game.is_alive((0, 0))
-    
+
     game.set_living((0, 0))
     assert game.is_alive((0, 0))
