@@ -109,3 +109,12 @@ def test_count_living_neighbours():
     assert game.count_living_neighbours((0, 0)) == 2
     assert game.count_living_neighbours((0, 1)) == 1
     assert game.count_living_neighbours((1, 1)) == 1
+
+
+def test_empty_tick():
+    game = Life()
+    assert len(list(game.living)) == 0
+    game.tick()
+    assert len(list(game.living)) == 0
+    game.tick()
+    assert len(list(game.living)) == 0
