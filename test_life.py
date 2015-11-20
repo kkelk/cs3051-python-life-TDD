@@ -205,3 +205,14 @@ def test_over_population_isolated():
     game.tick()
     assert not game.is_alive((0, 0))
     assert not game.is_alive((10, 10))
+
+
+def test_reproduction():
+    game = Life()
+    game.set_living((0, 0))
+    game.set_living((0, 1))
+    game.set_living((0, -1))
+
+    game.tick()
+    assert game.is_alive((1, 0))
+    assert game.is_alive((-1, 0))
