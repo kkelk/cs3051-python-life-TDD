@@ -153,3 +153,21 @@ def test_under_population_death_one_neighbour():
 
     game.tick()
     assert len(list(game.living)) == 0
+
+
+def test_isolated_under_population():
+    game = Life()
+    game.set_living((0, 0))
+    game.set_living((2, 2))
+    game.set_living((2, 3))
+    game.set_living((2, 4))
+
+    assert len(list(game.living)) == 4
+
+    game.tick()
+
+    # In this case, we need to check specific spaces, since the number alive will change once the reproduction rule is implemented
+    assert not game.is_alive((0, 0))
+    assert not game.is_alive((2, 2))
+    assert not game.is_alive((2, 4))
+    assert game.is_alive((2, 3))
