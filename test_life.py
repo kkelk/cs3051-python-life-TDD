@@ -171,3 +171,17 @@ def test_isolated_under_population():
     assert not game.is_alive((2, 2))
     assert not game.is_alive((2, 4))
     assert game.is_alive((2, 3))
+
+
+def test_over_population_death():
+    for count in range(4, 8):
+        game = Life()
+        game.set_living((0, 0))
+
+        neighbour = game.neighbours((0, 0))
+        for i in range(0, count):
+            game.set_living(neighbour.next())
+
+        assert game.is_alive((0, 0))
+        game.tick()
+        assert not game.is_alive((0, 0))
