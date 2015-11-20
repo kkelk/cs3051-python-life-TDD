@@ -251,3 +251,76 @@ def test_spinning():
         assert game.is_alive((-1, 0))
         assert game.is_alive((1, 0))
         assert len(list(game.living)) == 3
+
+
+def test_known_final_result():
+    """Using "small exploder" pattern:
+    X10
+    111
+    101
+    010
+
+    Known to produce the pattern
+    00000010000000
+    00000101000000
+    00000101000000
+    00000010000000
+    00000000000000
+    01100X00000110
+    10010000001001
+    01100000000110
+    00000000000000
+    00000010000000
+    00000101000000
+    00000101000000
+    00000010000000
+
+    after 16 iterations. X used to mark reference point.
+    """
+
+    game = Life()
+    # Initial pattern
+    game.set_living((1, 0))
+    game.set_living((0, 1))
+    game.set_living((1, 1))
+    game.set_living((2, 1))
+    game.set_living((0, 2))
+    game.set_living((2, 2))
+    game.set_living((1, 3))
+
+    for i in range(0, 17):
+        game.tick()
+
+    # Top pattern
+    assert game.is_alive((1, -5))
+    assert game.is_alive((0, -4))
+    assert game.is_alive((2, -4))
+    assert game.is_alive((0, -3))
+    assert game.is_alive((2, -3))
+    assert game.is_alive((1, -2))
+
+    # Left pattern
+    assert game.is_alive((-3, 0))
+    assert game.is_alive((-4, 0))
+    assert game.is_alive((-2, 1))
+    assert game.is_alive((-5, 1))
+    assert game.is_alive((-3, 2))
+    assert game.is_alive((-4, 2))
+
+    # Right pattern
+    assert game.is_alive((5, 0))
+    assert game.is_alive((6, 0))
+    assert game.is_alive((4, 1))
+    assert game.is_alive((7, 1))
+    assert game.is_alive((5, 2))
+    assert game.is_alive((6, 2))
+
+    # Bottom pattern
+    assert game.is_alive((1, 4))
+    assert game.is_alive((0, 5))
+    assert game.is_alive((2, 5))
+    assert game.is_alive((0, 6))
+    assert game.is_alive((2, 6))
+    assert game.is_alive((1, 7))
+
+    assert len(list(game.living)) == 24
