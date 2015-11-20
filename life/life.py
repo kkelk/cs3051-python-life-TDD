@@ -6,3 +6,6 @@ class Life(object):
     def living(self):
         for cell in self._living:
             yield cell
+
+    def set_living(self, (x, y)):
+        self._living.add((x, y))
