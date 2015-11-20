@@ -96,3 +96,16 @@ def test_invalid_neighbours():
     game = Life()
     with pytest.raises(TypeError):
         list(game.neighbours((True, True)))
+
+
+def test_count_living_neighbours():
+    game = Life()
+    assert game.count_living_neighbours((0, 0)) == 0
+
+    game.set_living((0, 1))
+    assert game.count_living_neighbours((0, 0)) == 1
+
+    game.set_living((1, 1))
+    assert game.count_living_neighbours((0, 0)) == 2
+    assert game.count_living_neighbours((0, 1)) == 1
+    assert game.count_living_neighbours((1, 1)) == 1
