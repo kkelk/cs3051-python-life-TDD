@@ -7,6 +7,14 @@ class Life(object):
         for cell in self._living:
             yield cell
 
+    def count_living_neighbours(self, (x, y)):
+        count = 0
+        for neighbour in self.neighbours((x, y)):
+            if self.is_alive(neighbour):
+                count += 1
+
+        return count
+
     def is_alive(self, (x, y)):
         return (x, y) in self._living
 
