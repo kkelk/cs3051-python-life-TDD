@@ -53,5 +53,10 @@ class Life(object):
             if self.count_living_neighbours(cell) < 2:
                 next_iteration.set_dead(cell)
 
+        # Overpopulation deaths.
+        for cell in self.living:
+            if self.count_living_neighbours(cell) > 3:
+                next_iteration.set_dead(cell)
+
         # Once all modifications to the next board state have been calculated, replace the current board with the newly calculated one.
         self._living = next_iteration._living
