@@ -40,3 +40,6 @@ class Life(object):
         if type(x) is not int or type(y) is not int:
             raise TypeError('It is only possible to set an integer co-ordinate pair to be a living cell.')
         self._living.add((x, y))
+
+    def tick(self):
+        pass
