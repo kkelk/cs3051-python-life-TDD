@@ -11,6 +11,8 @@ class Life(object):
         return (x, y) in self._living
 
     def set_dead(self, (x, y)):
+        if type(x) is not int or type(y) is not int:
+            raise TypeError('It is only possible to set an integer co-ordinate pair to be a dead cell.')
         self._living.discard((x, y))
 
     def set_living(self, (x, y)):
