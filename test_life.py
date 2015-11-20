@@ -32,3 +32,13 @@ def test_non_integer_set_living():
 
     assert (True, True) not in game.living
     assert ('test', 'test') not in game.living
+
+
+def test_repeated_set_living():
+    game = Life()
+    assert (0, 0) not in game.living
+    game.set_living((0, 0))
+    assert (0, 0) in game.living
+
+    game.set_living((0, 0))
+    assert (0, 0) in game.living
