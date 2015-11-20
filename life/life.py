@@ -11,6 +11,9 @@ class Life(object):
         return (x, y) in self._living
 
     def neighbours(self, (x, y)):
+        if type(x) is not int or type(y) is not int:
+            raise TypeError('It is only possible to calculate the neighbours for an integer co-ordinate pair.')
+
         yield (x - 1, y - 1)
         yield (x - 1, y)
         yield (x - 1, y + 1)
