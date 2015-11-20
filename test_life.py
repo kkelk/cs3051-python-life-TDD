@@ -118,3 +118,17 @@ def test_empty_tick():
     assert len(list(game.living)) == 0
     game.tick()
     assert len(list(game.living)) == 0
+
+
+def test_stable_block_tick():
+    game = Life()
+    game.set_living((0, 0))
+    game.set_living((0, 1))
+    game.set_living((1, 0))
+    game.set_living((1, 1))
+
+    assert len(list(game.living)) == 4
+    game.tick()
+    assert len(list(game.living)) == 4
+    game.tick()
+    assert len(list(game.living)) == 4
