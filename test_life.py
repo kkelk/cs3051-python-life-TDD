@@ -61,3 +61,15 @@ def test_set_dead():
     assert game.is_alive((0, 0))
     game.set_dead((0, 0))
     assert not game.is_alive((0, 0))
+
+
+def test_non_integer_set_dead():
+    # Technically nothing bad could happen by them calling set_dead with something invalid anyway --- since it could never exist in the set as set_living checks it is valid. It seems better to explicitly throw an exception, however, so that if an accidental mistake was made, it could be caught early.
+    game = Life()
+    with pytest.raises(TypeError):
+        game.set_dead((True, True))
+    with pytest.raises(TypeError):
+        game.set_dead(('test', 'test'))
+
+    assert (True, True) not in game.living
+    assert ('test', 'test') not in game.living
