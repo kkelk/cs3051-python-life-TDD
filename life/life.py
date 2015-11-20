@@ -58,5 +58,11 @@ class Life(object):
             if self.count_living_neighbours(cell) > 3:
                 next_iteration.set_dead(cell)
 
+        # Reproduction.
+        for cell in self.living:
+            for neighbour in self.neighbours(cell):
+                if self.count_living_neighbours(neighbour) == 3:
+                    next_iteration.set_living(neighbour)
+
         # Once all modifications to the next board state have been calculated, replace the current board with the newly calculated one.
         self._living = next_iteration._living
