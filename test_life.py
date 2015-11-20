@@ -143,3 +143,13 @@ def test_under_population_death():
     assert len(list(game.living)) == 0
     game.tick()
     assert len(list(game.living)) == 0
+
+
+def test_under_population_death_one_neighbour():
+    game = Life()
+    game.set_living((0, 0))
+    game.set_living((0, 1))
+    assert len(list(game.living)) == 2
+
+    game.tick()
+    assert len(list(game.living)) == 0
