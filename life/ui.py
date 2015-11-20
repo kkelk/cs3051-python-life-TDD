@@ -17,6 +17,7 @@ KEYBINDINGS = {
     ord('p'): 'toggle_play'
 }
 
+
 class CursesScreen(object):
     def __init__(self, stdscr):
         curses.curs_set(0)
@@ -65,7 +66,7 @@ class CursesScreen(object):
                     self._offset_x -= 1
                 elif action == 'screen_up':
                     self._offset_y -= 1
-                elif action == 'screen_down' :
+                elif action == 'screen_down':
                     self._offset_y += 1
                 elif action == 'screen_right':
                     self._offset_x += 1
@@ -106,8 +107,9 @@ class CursesScreen(object):
 
             self._render()
 
+
 def main(stdscr):
     CursesScreen(stdscr).loop()
-    
+
 if __name__ == '__main__':
     wrapper(main)
