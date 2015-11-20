@@ -231,3 +231,23 @@ def test_reproduction_stable():
         assert game.is_alive((-1, -1))
 
         assert game.is_alive((0, -1))
+
+
+def test_spinning():
+    game = Life()
+    game.set_living((0, 0))
+    game.set_living((-1, 0))
+    game.set_living((1, 0))
+
+    for i in range(0, 100):
+        game.tick()
+        assert game.is_alive((0, 0))
+        assert game.is_alive((0, 1))
+        assert game.is_alive((0, -1))
+        assert len(list(game.living)) == 3
+
+        game.tick()
+        assert game.is_alive((0, 0))
+        assert game.is_alive((-1, 0))
+        assert game.is_alive((1, 0))
+        assert len(list(game.living)) == 3
